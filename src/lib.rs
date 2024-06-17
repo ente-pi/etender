@@ -755,9 +755,9 @@ pub fn get_signal_path() -> String {
             .as_str(),
         );
         let res = res.unwrap().bytes().unwrap();
-        std::fs::write("./downloaded_file.tar.gz", &res)
+        std::fs::write("/home/jerin/RustProjects/etender/downloaded_file.tar.gz", &res)
             .expect("Reference proteome download failed for {file_name}");
-        let tar_gz = File::open("./downloaded_file.tar.gz").unwrap();
+        let tar_gz = File::open("/home/jerin/RustProjects/etender/downloaded_file.tar.gz").unwrap();
         let tar = flate2::read::GzDecoder::new(tar_gz);
         let mut archive = tar::Archive::new(tar);
         archive.unpack("/opt").unwrap();
@@ -787,13 +787,13 @@ fn signal_version_check() -> (bool, String) {
     let mut new_version_found = false;
     if !p.is_empty() {
         version_number = p[0].to_string();
-        let file = File::open("./signal_version_number.txt").unwrap();
+        let file = File::open("/home/jerin/RustProjects/etender/signal_version_number.txt").unwrap();
         let reader = BufReader::new(file);
         let line = reader.lines().flatten().last().unwrap();
         println!("{}", line);
         if version_number != line {
             println!("Downloading new signal version.");
-            fs::write("./signal_version_number.txt", &version_number).unwrap();
+            fs::write("/home/jerin/RustProjects/etender/signal_version_number.txt", &version_number).unwrap();
             new_version_found = true;
         }
     }
@@ -816,13 +816,13 @@ fn get_libsignal_version() -> (bool, String) {
     let q = q.split_once("_").unwrap().1.split_once('"').unwrap().0;
     let mut new_version_found = false;
     let version_number = q.to_string();
-    let file = File::open("./libsignal_version_number.txt").unwrap();
+    let file = File::open("/home/jerin/RustProjects/etender/libsignal_version_number.txt").unwrap();
     let reader = BufReader::new(file);
     let line = reader.lines().flatten().last().unwrap();
     println!("{}", line);
     if version_number != line {
         println!("Downloading new libsignal version.");
-        fs::write("./libsignal_version_number.txt", &version_number).unwrap();
+        fs::write("/home/jerin/RustProjects/etender/libsignal_version_number.txt", &version_number).unwrap();
         new_version_found = true;
     }
     (new_version_found, version_number)
@@ -841,9 +841,9 @@ fn replace_with_correct_libsignal(signal_version: &str) {
         println!("{}", url);
         let res = get_url_response(&client, &url);
         let res = res.unwrap().bytes().unwrap();
-        std::fs::write("./downloaded_file.tar.gz", &res)
+        std::fs::write("/home/jerin/RustProjects/etender/downloaded_file.tar.gz", &res)
             .expect("Reference proteome download failed for {file_name}");
-        let tar_gz = File::open("./downloaded_file.tar.gz").unwrap();
+        let tar_gz = File::open("/home/jerin/RustProjects/etender/downloaded_file.tar.gz").unwrap();
         let tar = flate2::read::GzDecoder::new(tar_gz);
         let mut archive = tar::Archive::new(tar);
         archive.unpack("/opt").unwrap();
