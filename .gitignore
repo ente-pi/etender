@@ -1,0 +1,6 @@
+/target
+/tenders
+/downloaded_file.tar.gz
+/libsignal_version_number.txt
+/signal_version_number.txt
+/Cargo.lock
